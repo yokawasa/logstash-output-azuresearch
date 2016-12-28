@@ -20,11 +20,11 @@ output {
         endpoint => "https://<YOUR ACCOUNT>.search.windows.net"
         api_key => "<AZURESEARCH API KEY>"
         search_index => "<SEARCH INDEX NAME>"
-        column_names => ['postid','user','content','posttime'] 
-        key_names => ['postid','user','content','posttime']
-        flush_items => 100
-        flush_interval_time => 5
-    }
+        column_names => ['col1','col2','col3'..]  ##  ## list of column names (array)
+        key_names => ['key1','key2','key3'..] ## list of Key names (array)
+        flush_items => <FLUSH_ITEMS_NUM>
+        flush_interval_time => <FLUSH INTERVAL TIME(sec)>
+   }
 }
 ```
 
@@ -55,6 +55,8 @@ output {
         search_index => "<SEARCH INDEX NAME>"
         column_names => ['id','user_name','message','created_at']
         key_names => ['postid','user','content','posttime']
+        flush_items => 100
+        flush_interval_time => 5
     }
 }
 ```
