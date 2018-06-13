@@ -18,10 +18,10 @@ Gem::Specification.new do |s|
   s.metadata = { "logstash_plugin" => "true", "logstash_group" => "output" }
 
   # Gem dependencies
-  s.add_runtime_dependency "rest-client", "1.8.0"
-  s.add_runtime_dependency "logstash-core", ">= 2.0.0", "< 3.0.0"
-  s.add_runtime_dependency "logstash-codec-plain"  
-  s.add_development_dependency "logstash-devutils"
+  s.add_runtime_dependency "rest-client",              "~> 1.8.0"
+  s.add_runtime_dependency "logstash-core",            "~> 5.0.0"
   s.add_runtime_dependency "logstash-core-plugin-api", "~> 2.0"
+  s.add_runtime_dependency "logstash-codec-plain"      "~> 3.0.3"
+  s.add_development_dependency "logstash-devutils"
 
 end
