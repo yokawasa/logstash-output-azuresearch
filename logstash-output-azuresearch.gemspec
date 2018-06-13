@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "rest-client",              "~> 1.8.0"
   s.add_runtime_dependency "logstash-core",            "~> 5.0.0"
   s.add_runtime_dependency "logstash-core-plugin-api", "~> 2.0"
-  s.add_runtime_dependency "logstash-codec-plain"      "~> 3.0.3"
+  s.add_runtime_dependency "logstash-codec-plain",      "~> 3.0.3"
   s.add_development_dependency "logstash-devutils"
 
 end
