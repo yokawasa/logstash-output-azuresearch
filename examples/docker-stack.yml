@@ -1,0 +1,67 @@
+version: "3.3"
+
+services: 
+  app: 
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 1024M
+      labels: 
+        com.docker.ucp.access.label: demo
+        com.docker.ucp.mesh.http.80: "external_route=http://helloworld.${DOMAIN},internal_port=80"
+      placement: 
+        constraints: 
+          - "node.labels.tower == common"
+          - "node.platform.os == linux"
+    image: "jwilder/hello-world:latest"
+    ports:
+      - 80/tcp
+    networks: 
+      - hrm
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "udp://logger:514"
+
+  logger: 
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 1024M
+        reservations:
+          cpus: '0.25'
+          memory: 1536M
+      labels: 
+        com.docker.ucp.access.label: demo
+      placement: 
+        constraints: 
+          - "node.labels.tower == common"
+          - "node.platform.os == linux"
+    image: "dtr.${DOMAIN}/logger"
+    environment:
+      - AZURE_ACCOUNT="${AZURE_ACCOUNT}"
+      - AZURE_APIKEY="${AZURE_APIKEY}"
+    ports:
+      - 512/udp
+    networks: 
+      - hrm
+
+networks:
+  hrm: 
+    external: 
+      name: ucp-hrm
